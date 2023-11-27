@@ -1,42 +1,54 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<script>
+</script>
 <template>
   <div>
-    <button @click="openAuthorizationUrl">TOKEN</button>
+    <button @click="openAuthorizationUrl" v-if="status">TOKEN</button>
+    
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      status: true
+    }
+  },
+  mounted() {
+    const params = new URLSearchParams(window.location.hash.substr(1))
+    console.log(params)
+    const accessToken = params.get('access_token')
+
+    if (accessToken) {
+      this.status = false
+    }
+  },
   methods: {
     openAuthorizationUrl() {
-      const url = new URL('https://oauth.vk.com/authorize');
-      url.searchParams.set('client_id', '51802731');
-      url.searchParams.set('redirect_uri', 'https://oauth.vk.com/blank.html');
-      url.searchParams.set('display', 'mobile');
-      url.searchParams.set('scope', 'offline,friends');
-      url.searchParams.set('response_type', 'token');
-      url.searchParams.set('v', '5.131');
+      const url = new URL('https://oauth.vk.com/authorize')
+      url.searchParams.set('client_id', '51802731')
+      url.searchParams.set('redirect_uri', `${window.location.href}`)
+      url.searchParams.set('display', 'mobile')
+      url.searchParams.set('scope', 'offline,friends')
+      url.searchParams.set('response_type', 'token')
+      url.searchParams.set('v', '5.131')
 
-      const newWindow = window.open(url.toString(), '_blank');
+      const newWindow = window.open(url.toString(), '_blank')
 
-      // Wait for the user to authorize and close the new window
       const intervalId = setInterval(() => {
         if (newWindow.closed) {
-          clearInterval(intervalId);
-          
-          // Retrieve parameters from the new window's URL
-          const params = new URLSearchParams(newWindow.location.href);
-          console.log(params);
-          const accessToken = params.get('access_token');
-          const expiresIn = params.get('expires_in');
-          
-          if (accessToken && expiresIn) {
-            // Use the access token and expiration data as needed
-            console.log("Access Token:", accessToken);
-            console.log("Expires In:", expiresIn);
+          clearInterval(intervalId)
+
+          const params = new URLSearchParams(newWindow.location.hash.substr(1))
+          console.log(params)
+          const accessToken = params.get('access_token')
+
+          if (accessToken) {
+            console.log('Access Token:', accessToken)
           }
         }
-      }, 500);
+      }, 500)
     }
   }
 }
