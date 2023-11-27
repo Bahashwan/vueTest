@@ -1,12 +1,14 @@
 <script setup>
-import Api from './components/Api.vue'
+import VkAuth from './components/VkAuth.vue'
 import Redirect from './components/Redirect.vue'
+import VkSearchInput from './components/VkSearchInput.vue'
 </script>
 
 <template>
   <main>
-    <Api />
+    <VkAuth />
     <Redirect />
+    <VkSearchInput />
   </main>
 </template>
 

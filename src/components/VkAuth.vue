@@ -1,10 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script>
-</script>
+<script></script>
 <template>
   <div>
-    <button @click="openAuthorizationUrl" v-if="status">TOKEN</button>
-    
+    <button @click="openAuthorizationUrl" v-if="status">LogIn VK</button>
+  </div>
+  <div>
+
+    <button @click="logOut" v-if="logoutStatus">LogOut VK</button>
   </div>
 </template>
 
@@ -12,16 +14,18 @@
 export default {
   data() {
     return {
-      status: true
+      status: true,
+      logoutStatus:false,
+      VKtoken: ''
     }
   },
   mounted() {
     const params = new URLSearchParams(window.location.hash.substr(1))
-    console.log(params)
+    const localStorageToken = localStorage.getItem('token')
     const accessToken = params.get('access_token')
-
-    if (accessToken) {
+    if (accessToken || localStorageToken) {
       this.status = false
+      this.logoutStatus = true
     }
   },
   methods: {
@@ -45,10 +49,16 @@ export default {
           const accessToken = params.get('access_token')
 
           if (accessToken) {
-            console.log('Access Token:', accessToken)
+            this.VKtoken = accessToken
+            localStorage.setItem('token', accessToken)
+            this.status = false
           }
         }
       }, 500)
+    },
+    logOut() {
+      localStorage.token = ''
+      window.location.href = `${window.location.href}`
     }
   }
 }
