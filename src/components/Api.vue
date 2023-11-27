@@ -25,8 +25,8 @@ export default {
           clearInterval(intervalId);
           
           // Retrieve parameters from the new window's URL
-          console.log(newWindow);
-          const params = newWindow.location.href;
+          const params = new URLSearchParams(newWindow.location.href);
+          console.log(params);
           const accessToken = params.get('access_token');
           const expiresIn = params.get('expires_in');
           
