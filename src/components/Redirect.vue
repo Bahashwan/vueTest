@@ -9,15 +9,13 @@
 <script>
 export default {
   data() {
-    return { 
-        status: false,
+    return {
+      status: false
     }
   },
   mounted() {
     const params = new URLSearchParams(window.location.hash.substr(1))
-    // console.log(params)
     const accessToken = params.get('access_token')
-
     if (accessToken) {
       this.status = true
       this.closeWindow()

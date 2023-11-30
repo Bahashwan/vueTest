@@ -2,6 +2,7 @@
 import VkAuth from './components/VkAuth.vue'
 import Redirect from './components/Redirect.vue'
 import VkSearchInput from './components/VkSearchInput.vue'
+import FriendsList from './components/FriendsList.vue';
 </script>
 
 <template>
@@ -9,6 +10,8 @@ import VkSearchInput from './components/VkSearchInput.vue'
     <VkAuth />
     <Redirect />
     <VkSearchInput />
+    <FriendsList />
+
   </main>
 </template>
 

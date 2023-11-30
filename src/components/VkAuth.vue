@@ -34,7 +34,7 @@ export default {
       url.searchParams.set('client_id', '51802731')
       url.searchParams.set('redirect_uri', `${window.location.href}`)
       url.searchParams.set('display', 'mobile')
-      url.searchParams.set('scope', 'offline,friends')
+      url.searchParams.set('scope', 'offline,friends,photos')
       url.searchParams.set('response_type', 'token')
       url.searchParams.set('v', '5.131')
 
