@@ -5,11 +5,9 @@ module.exports = {
       '/api.vk.com': {
         target: 'https://api.vk.com',
         changeOrigin: true,
-        headers: {
-          Referer: 'https://api.vk.com/',
-          Origin: 'https://api.vk.com/'
-        },
-        rewrite: (path) => path.replace(/^\/api.vk.com/, '')
+        pathRewrite: {
+          '^/api.vk.com': ''
+        }
       }
     }
   }
