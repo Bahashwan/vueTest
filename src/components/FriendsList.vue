@@ -19,7 +19,7 @@ export default {
     fetchUsers(id) {
       let config = {
         method: 'get',
-        url: 'https://api.vk.com/method/users.get',
+        url: '/api.vk.com/method/users.get',
         params: {
           access_token: this.token,
           v: '5.131',
@@ -28,15 +28,7 @@ export default {
       }
 
       // eslint-disable-next-line no-unused-vars
-      let configOnLocalHost = {
-        method: 'get',
-        url: 'https://cors-anywhere.herokuapp.com/https://api.vk.com/method/users.get',
-        params: {
-          access_token: this.token,
-          v: '5.131',
-          user_ids: id
-        }
-      }
+
       axios.request(config).then((data) => {
         //
         const user = data.data.response
@@ -48,7 +40,7 @@ export default {
     getFriends() {
       let config = {
         method: 'get',
-        url: 'https://api.vk.com/method/friends.get',
+        url: '/api.vk.com/method/friends.get',
         params: {
           access_token: this.token,
           v: '5.131'
@@ -56,14 +48,7 @@ export default {
       }
 
       // eslint-disable-next-line no-unused-vars
-      let configOnLocalHost = {
-        method: 'get',
-        url: 'https://cors-anywhere.herokuapp.com/https://api.vk.com/method/friends.get',
-        params: {
-          access_token: this.token,
-          v: '5.131'
-        }
-      }
+
       axios
         .request(config)
         .then((data) => {

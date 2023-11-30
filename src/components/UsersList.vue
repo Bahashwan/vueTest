@@ -30,7 +30,7 @@ export default {
     async getUserPhoto(userId) {
       let config = {
         method: 'get',
-        url: 'https://api.vk.com/method/photos.getProfile',
+        url: '/api.vk.com/method/photos.getProfile',
         params: {
           access_token: localStorage.getItem('token'),
           v: '5.131',
@@ -38,16 +38,7 @@ export default {
         }
       }
 
-      // eslint-disable-next-line no-unused-vars
-      let configOnLocalHost = {
-        method: 'get',
-        url: 'https://cors-anywhere.herokuapp.com/https://api.vk.com/method/photos.getProfile',
-        params: {
-          access_token: localStorage.getItem('token'),
-          v: '5.131',
-          user_id: userId
-        }
-      }
+    
 
       try {
         const response = await axios.request(config)

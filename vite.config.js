@@ -16,27 +16,26 @@
 // })
 
 import vue from '@vitejs/plugin-vue'
-import { createProxyMiddleware } from 'http-proxy'
-import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
 
-export default {
+export default defineConfig({
   plugins: [vue()],
   resolve: {
-    alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) }
+    alias: {
+      '@': '/path/to/your/src/folder'
+    }
   },
   server: {
-    before: (app) => {
-      app.use(
-        '/api',
-        createProxyMiddleware({
-          target: 'https://oauth.vk.com',
-          secure: false,
-          changeOrigin: true,
-          pathRewrite: {
-            '^/api': '' // remove the '/api' prefix in the proxy request
-          },
-        })
-      );
-    },
-  },
-}
+    proxy: {
+      '/api.vk.com': {
+        target: 'https://api.vk.com',
+        changeOrigin: true,
+        headers: {
+          Referer: 'https://api.vk.com/',
+          Origin: 'https://api.vk.com/'
+        },
+        rewrite: (path) => path.replace(/^\/api.vk.com/, ''),
+      }
+    }
+  }
+})

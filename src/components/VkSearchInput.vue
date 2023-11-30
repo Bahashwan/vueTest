@@ -21,7 +21,7 @@ export default {
     getUsers() {
 
       let config={
-        url:'https://api.vk.com/method/users.search',
+        url:'/api.vk.com/method/users.search',
         params:{
           access_token:this.VkToken,
           v:'5.131',
@@ -29,15 +29,7 @@ export default {
         }
       }
 
-      // eslint-disable-next-line no-unused-vars
-      let configOnLocalHost={
-        url:'https://cors-anywhere.herokuapp.com/https://api.vk.com/method/users.search',
-        params:{
-          access_token:this.VkToken,
-          v:'5.131',
-          q:this.inputValue
-        }
-      }
+      
 
         axios.request(config)
         .then((data) => {
@@ -49,7 +41,7 @@ export default {
     getUserPhoto(userId) {
       let config = {
         method: 'get',
-        url: 'https://api.vk.com/method/photos.getAll',
+        url: '/api.vk.com/method/photos.getAll',
         params: {
           access_token: localStorage.getItem('token'),
           v: '5.131',
@@ -58,17 +50,7 @@ export default {
         }
       }
 
-      // eslint-disable-next-line no-unused-vars
-      let configOnLocalHost = {
-        method: 'get',
-        url: 'https://cors-anywhere.herokuapp.com/https://api.vk.com/method/photos.getAll',
-        params: {
-          access_token: localStorage.getItem('token'),
-          v: '5.131',
-          count: '1',
-          user_id: userId
-        }
-      }
+     
 
       axios
         .request(config)

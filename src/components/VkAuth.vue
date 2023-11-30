@@ -5,7 +5,6 @@
     <button @click="openAuthorizationUrl" v-if="status">LogIn VK</button>
   </div>
   <div>
-
     <button @click="logOut" v-if="logoutStatus">LogOut VK</button>
   </div>
 </template>
@@ -15,7 +14,7 @@ export default {
   data() {
     return {
       status: true,
-      logoutStatus:false,
+      logoutStatus: false,
       VKtoken: ''
     }
   },
